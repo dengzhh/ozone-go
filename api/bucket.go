@@ -21,11 +21,11 @@ func (ozoneClient *OzoneClient) CreateBucket(volume string, bucket string) error
 	return ozoneClient.OmClient.CreateBucket(volume, bucket)
 }
 
-func (ozoneClient *OzoneClient) GetBucket(volume string, bucket string) (common.Bucket, error) {
+func (ozoneClient *OzoneClient) GetBucket(volume string, bucket string) (common.BucketInfo, error) {
 	return ozoneClient.OmClient.GetBucket(volume, bucket)
 }
 
-func (ozoneClient *OzoneClient) ListBucket(volume string) ([]common.Bucket, error) {
+func (ozoneClient *OzoneClient) ListBucket(volume string) ([]common.BucketInfo, error) {
 	return ozoneClient.OmClient.ListBucket(volume)
 
 }

@@ -15,27 +15,31 @@
 // limitations under the License.
 package common
 
-type ReplicationType int
+import "github.com/apache/ozone-go/api/proto/hdds"
 
-const (
-	RATIS      ReplicationType = 1
-	STANDALONE ReplicationType = 2
-)
-
-type Volume struct {
+type VolumeInfo struct {
 	Name  string
 	Owner string
 }
 
-type Key struct {
+type KeyInfo struct {
 	Name        string
 	BucketName  string
 	VolumeName  string
-	Replication ReplicationType
+	Replication hdds.ReplicationType
 	Size        uint64
+	CTime       uint64
+	MTime       uint64
+	IsDir       bool
 }
 
-type Bucket struct {
-	Name       string
-	VolumeName string
+type BucketInfo struct {
+	Name            string
+	VolumeName      string
+	ReplicationType hdds.ReplicationType
+	Replication     hdds.ReplicationFactor
+	EcData          int32
+	EcParity        int32
+	EcCodec         string
+	EcChunkSize     int32
 }

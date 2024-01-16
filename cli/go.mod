@@ -22,5 +22,7 @@ replace github.com/apache/ozone-go/api => ../api
 
 require (
 	github.com/apache/ozone-go/api v0.0.0-20201212100630-cee64fa835db
+	github.com/klauspost/reedsolomon v1.11.7 // indirect
 	github.com/urfave/cli v1.22.5
+	google.golang.org/grpc v1.36.0 // indirect
 )

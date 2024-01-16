@@ -26,6 +26,10 @@ func (dnClient *DatanodeClient) sendStandaloneDatanodeCommand(proto dnapi.Contai
 	if err != nil {
 		return dnapi.ContainerCommandResponseProto{}, err
 	}
+	if dnClient.standaloneRequests != nil {
+		dnClient.standaloneRequests <- &proto
+		return dnapi.ContainerCommandResponseProto{}, nil
+	}
 	resp := <-dnClient.standaloneReceiver
 	return resp, err
 }

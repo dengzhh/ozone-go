@@ -17,7 +17,7 @@ package api
 
 import "github.com/apache/ozone-go/api/common"
 
-func (ozoneClient *OzoneClient) ListVolumes() ([]common.Volume, error) {
+func (ozoneClient *OzoneClient) ListVolumes() ([]common.VolumeInfo, error) {
 	return ozoneClient.OmClient.ListVolumes()
 }
 
@@ -25,6 +25,6 @@ func (ozoneClient *OzoneClient) CreateVolume(name string) error {
 	return ozoneClient.OmClient.CreateVolume(name)
 }
 
-func (ozoneClient *OzoneClient) GetVolume(name string) (common.Volume, error) {
+func (ozoneClient *OzoneClient) GetVolume(name string) (common.VolumeInfo, error) {
 	return ozoneClient.OmClient.GetVolume(name)
 }

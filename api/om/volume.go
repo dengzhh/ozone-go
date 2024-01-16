@@ -20,7 +20,7 @@ import (
 	ozone_proto "github.com/apache/ozone-go/api/proto/ozone"
 )
 
-func (om *OmClient) ListVolumes() ([]common.Volume, error) {
+func (om *OmClient) ListVolumes() ([]common.VolumeInfo, error) {
 	scope := ozone_proto.ListVolumeRequest_VOLUMES_BY_USER
 	req := ozone_proto.ListVolumeRequest{
 		Scope:    &scope,
@@ -36,13 +36,13 @@ func (om *OmClient) ListVolumes() ([]common.Volume, error) {
 		ClientId:          &clientId,
 	}
 
-	volumes := make([]common.Volume, 0)
+	volumes := make([]common.VolumeInfo, 0)
 	resp, err := om.submitRequest(&wrapperRequest)
 	if err != nil {
 		return nil, err
 	}
 	for _, volProto := range resp.GetListVolumeResponse().GetVolumeInfo() {
-		volumes = append(volumes, common.Volume{Name: *volProto.Volume})
+		volumes = append(volumes, common.VolumeInfo{Name: *volProto.Volume})
 	}
 	return volumes, nil
 }
@@ -74,7 +74,7 @@ func (om *OmClient) CreateVolume(name string) error {
 	return nil
 }
 
-func (om *OmClient) GetVolume(name string) (common.Volume, error) {
+func (om *OmClient) GetVolume(name string) (common.VolumeInfo, error) {
 	req := ozone_proto.InfoVolumeRequest{
 		VolumeName: &name,
 	}
@@ -88,10 +88,10 @@ func (om *OmClient) GetVolume(name string) (common.Volume, error) {
 
 	resp, err := om.submitRequest(&wrapperRequest)
 	if err != nil {
-		return common.Volume{}, err
+		return common.VolumeInfo{}, err
 	}
 
-	vol := common.Volume{}
+	vol := common.VolumeInfo{}
 	vol.Name = *resp.InfoVolumeResponse.VolumeInfo.Volume
 	vol.Owner = *resp.InfoVolumeResponse.VolumeInfo.OwnerName
 
